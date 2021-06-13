@@ -1,0 +1,50 @@
+.dashboardWrapper {
+    $top-nav-bar-height: 60px;
+    $bottom-nav-bar-height: 50px;
+
+    @include wh-100p;
+    position: relative;
+
+    display: grid;
+    grid-template-rows: $top-nav-bar-height 1fr $bottom-nav-bar-height;
+
+    .dashboardCoreContainer {
+        @include wh-100p;
+
+        // position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .tempContainer {
+            @include wh-100p;
+            @include flex(column, flex-start, flex-start);
+            @include appLeftRightPadding;
+            // background-color: $background-secondary;
+
+            .companyQuote {
+                // color: $logo-primary-color;
+                font-size: $font-size-large;
+                text-align: center;
+                align-self: center;
+                padding-top: 35px;
+                padding-bottom: 35px;
+            }
+            .vaccineQuote {
+                // color: $logo-primary-color;
+                font-size: $font-size-master;
+                text-align: center;
+                align-self: center;
+                padding-top: 10px;
+                padding-bottom: 35px;
+            }
+            .BookNowContainer {
+                color: $logo-primary-color;
+                font-size: $font-size-master;
+                text-align: center;
+                align-self: center;
+                padding-top: 10px;
+                justify-self: center;
+            }
+        }
+    }
+}

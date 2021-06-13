@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap);
+@import './_colors.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    font-family: Inter, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+    user-select: none; // for native app like behaviour
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $background-contrast;
+    border-radius: 0.2rem;
+
+    &:hover,
+    &:active {
+        background-color: rgba($background-contrast, $alpha: 0.7);
+    }
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+// base icon color for svg icons
+.base-icon-color {
+    fill: $logo-primary-color;
+}

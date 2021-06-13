@@ -1,0 +1,18 @@
+.appWrapper {
+    @include wh-100v;
+    @include flex(column, center, start);
+    overflow: hidden;
+    position: relative;
+    .appCoreWrapper {
+        @include wh-100p;
+        overflow: auto;
+        // background: $background-primary;
+        color: $font-primary;
+        position: relative;
+        .appContainer {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+}

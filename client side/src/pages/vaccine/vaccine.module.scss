@@ -1,0 +1,52 @@
+.homeContainer {
+    @include wh-100p;
+    @include flex(column, flex-start, flex-start);
+    @include appLeftRightPadding;
+    max-height: 500px;
+    // background-color: $background-secondary;
+
+    .vaccineContainer {
+        // color: $logo-primary-color;
+        // font-size: $font-size-large;
+        @include wh-100p;
+        @include flex(column, flex-start, flex-start);
+        @include appLeftRightPadding;
+        text-align: center;
+        align-self: center;
+        margin-top: 35px;
+        padding-bottom: 35px;
+        border-radius: 5px;
+        box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.24), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
+    }
+    .titleContainer {
+        // color: $logo-primary-color;
+        @include flex(row, center, flex-start, 5px);
+        font-size: $font-size-master;
+        font-weight: bold;
+        text-align: center;
+        // align-self: center;
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+    .slotContainer {
+        // color: $logo-primary-color;
+        @include wh-100p;
+        @include flex(column, center, flex-start);
+        font-size: $font-size-master;
+        text-align: center;
+        padding-top: 10px;
+        border: 1px solid #b3b3b3;
+        border-radius: 5px;
+
+        .slotItems {
+            align-self: flex-start;
+            @include appLeftRightPadding;
+        }
+        .slotItemsOptions {
+            align-self: flex-start;
+            @include appLeftRightPadding;
+            @include flex(row, flex-start, space-between);
+            width: 100%;
+        }
+    }
+}

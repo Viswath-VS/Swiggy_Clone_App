@@ -1,0 +1,65 @@
+@import 'colors';
+
+.disableButton {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.displayNone {
+    display: none !important;
+}
+
+.textAlignRight {
+    text-align: right;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+.textAlignLeft {
+    text-align: left;
+}
+
+.flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.spinnerColor {
+    div {
+        border-top-color: $logo-primary-color;
+    }
+}
+
+.pointerEventsNone {
+    pointer-events: none;
+}
+
+.separator {
+    width: 100%;
+
+    &::before {
+        background-color: $background-tertiary !important;
+    }
+
+    div {
+        background: transparent !important;
+        color: $foreground-secondary;
+    }
+}
+
+.navigationContainer {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.commonIconSize {
+    font-size: $icon-size;
+    height: $icon-size;
+}

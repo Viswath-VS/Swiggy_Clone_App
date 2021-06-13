@@ -1,0 +1,61 @@
+@import './colors';
+@import './variables';
+@mixin flex($direction: column, $align-items: flex-start, $justify-content: flex-start, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    gap: $gap;
+}
+
+@mixin wh-100p {
+    width: 100%;
+    height: 100%;
+}
+
+@mixin wh-100v {
+    width: 100vw;
+    height: 100vh;
+}
+
+@mixin appLeftRightPadding {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+@mixin primaryTypography {
+    h1 {
+        font-size: $font-size-primary;
+        padding: 20px 0px;
+    }
+
+    h2 {
+        font-size: $font-size-secondary;
+        padding: 10px 0px;
+    }
+
+    p {
+        font-size: $font-size-tertiary;
+        padding-bottom: 10px;
+        line-height: 20px;
+    }
+
+    a {
+        color: $info-color;
+    }
+
+    ul {
+        margin: 0px 0;
+        padding: 0;
+        list-style: inside;
+
+        li {
+            font-size: $font-size-tertiary;
+            line-height: 20px;
+            margin: 0px;
+            padding: 0px;
+            text-indent: -1.5em;
+            margin-left: 2em;
+        }
+    }
+}

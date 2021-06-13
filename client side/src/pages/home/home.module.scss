@@ -1,0 +1,31 @@
+.homeContainer {
+    @include wh-100p;
+    @include flex(column, flex-start, flex-start);
+    @include appLeftRightPadding;
+    // background-color: $background-secondary;
+
+    .companyQuote {
+        // color: $logo-primary-color;
+        font-size: $font-size-large;
+        text-align: center;
+        align-self: center;
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+    .vaccineQuote {
+        // color: $logo-primary-color;
+        font-size: $font-size-master;
+        text-align: center;
+        align-self: center;
+        padding-top: 10px;
+        padding-bottom: 35px;
+    }
+    .BookNowContainer {
+        color: $logo-primary-color;
+        font-size: $font-size-master;
+        text-align: center;
+        align-self: center;
+        padding-top: 10px;
+        justify-self: center;
+    }
+}

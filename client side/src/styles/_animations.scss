@@ -1,0 +1,97 @@
+@mixin animation(
+    $name: '',
+    $duration: 0.5s,
+    $fillMode: both,
+    $timingFunction: ease,
+    $direction: normal,
+    $delay: 0s,
+    $iterationCount: 1,
+    $playstate: running
+) {
+    /*  (name of the animation) (@keyframes) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name */
+    animation-name: $name;
+    --webkit-animation-name: $name;
+
+    /*  (infinite | number) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count */
+    animation-duration: $duration;
+    --webkit-animation-duration: $duration;
+
+    /*  (none | forwards | backwards | both) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode */
+    animation-fill-mode: $fillMode;
+    --webkit-animation-fill-mode: $fillMode;
+
+    /*  (ease | ease-in | ease-out | ease-in-out | linear | step-start | step-end) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function */
+    animation-timing-function: $timingFunction;
+    --webkit-animation-timing-function: $timingFunction;
+
+    /*  (normal | reverse | alternate | alternate-reverse) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction */
+    animation-direction: $direction;
+    --webkit-animation-direction: $direction;
+
+    /*  (number) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay */
+    animation-delay: $delay;
+    --webkit-animation-delay: $delay;
+
+    /*  (number) // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration */
+    animation-iteration-count: $iterationCount;
+    --webkit-animation-iteration-count: $iterationCount;
+
+    /*  (running | paused) https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state */
+    animation-play-state: $playstate;
+    --webkit-animation-play-state: $playstate;
+}
+
+// keyframes
+@keyframes slide-in-from-left {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-in-from-right {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes scale-x {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes scale-y {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes scale-y-reverse {
+    0% {
+        transform: scaleY(1);
+    }
+    100% {
+        transform: scaleY(0);
+    }
+}
+
+@keyframes scale-xy {
+    0% {
+        transform: scale(0, 0);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
