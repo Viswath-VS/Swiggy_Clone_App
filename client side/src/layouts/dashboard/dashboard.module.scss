@@ -10,8 +10,7 @@
 
     .dashboardCoreContainer {
         @include wh-100p;
-
-        // position: relative;
+        position: relative;
         overflow-x: hidden;
         overflow-y: auto;
 

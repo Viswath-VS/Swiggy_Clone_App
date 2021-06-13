@@ -1,0 +1,40 @@
+.authWrapper {
+    $top-nav-bar-height: 60px;
+    $bottom-nav-bar-height: 50px;
+
+    @include wh-100p;
+    position: relative;
+
+    display: grid;
+    grid-template-rows: $top-nav-bar-height 1fr $bottom-nav-bar-height;
+
+    .authCoreContainer {
+        @include wh-100p;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .loginContainer {
+            @include wh-100p;
+            @include flex(column, center, flex-start);
+            @include appLeftRightPadding;
+
+            .loginTitle {
+                // @include wh-100p;
+                @include appLeftRightPadding;
+                font-size: $font-size-master;
+                color: $font-primary;
+                padding: 35px 0;
+            }
+            .loginBox {
+                @include flex(column, center, flex-start, 35px);
+                @include appLeftRightPadding;
+                padding-top: 35px;
+                min-height: 300px;
+                border: 2px solid $logo-primary-color;
+                border-radius: 5px;
+                box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.24), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
+            }
+        }
+    }
+}

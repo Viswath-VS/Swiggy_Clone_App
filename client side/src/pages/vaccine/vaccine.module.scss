@@ -3,11 +3,10 @@
     @include flex(column, flex-start, flex-start);
     @include appLeftRightPadding;
     max-height: 500px;
-    // background-color: $background-secondary;
+    height: auto;
+    width: auto;
 
     .vaccineContainer {
-        // color: $logo-primary-color;
-        // font-size: $font-size-large;
         @include wh-100p;
         @include flex(column, flex-start, flex-start);
         @include appLeftRightPadding;
@@ -19,17 +18,15 @@
         box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.24), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
     }
     .titleContainer {
-        // color: $logo-primary-color;
         @include flex(row, center, flex-start, 5px);
         font-size: $font-size-master;
         font-weight: bold;
         text-align: center;
-        // align-self: center;
         padding-top: 10px;
         padding-bottom: 15px;
+        flex-wrap: wrap;
     }
     .slotContainer {
-        // color: $logo-primary-color;
         @include wh-100p;
         @include flex(column, center, flex-start);
         font-size: $font-size-master;
@@ -37,16 +34,40 @@
         padding-top: 10px;
         border: 1px solid #b3b3b3;
         border-radius: 5px;
+        flex-wrap: wrap;
 
         .slotItems {
             align-self: flex-start;
             @include appLeftRightPadding;
+            flex-wrap: wrap;
         }
         .slotItemsOptions {
             align-self: flex-start;
             @include appLeftRightPadding;
-            @include flex(row, flex-start, space-between);
+            @include flex(row, baseline, space-around);
             width: 100%;
+            flex-wrap: wrap;
+        }
+        .slotItemsCenter {
+            align-self: center;
+            justify-self: center;
+            @include appLeftRightPadding;
+            flex-wrap: wrap;
+            padding-top: 35px;
+        }
+        .hospitalLists {
+            align-self: center;
+            justify-self: center;
+            @include appLeftRightPadding;
+            flex-wrap: wrap;
+            // padding-top: 35px;
+
+            .hospitalListItems {
+                @include flex(row, center, space-between, 15px);
+                @include appLeftRightPadding;
+                flex-wrap: wrap;
+                padding-top: 15px;
+            }
         }
     }
 }

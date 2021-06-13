@@ -7,4 +7,5 @@ export const ROUTES = {
     DASHBOARD: '/',
     HOME: '/',
     APPOINTMENT: '/bookslot',
+    APPOINTMENT_CONFORMATION: '/bookslot/confirmation',
 };

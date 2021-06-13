@@ -6,7 +6,7 @@ import DashBoard from 'layouts/dashboard/dashboard';
 import Auth from 'layouts/auth/auth';
 const App = (): ReactElement => {
     const authState = {
-        isAuthenticated: true,
+        isAuthenticated: false,
     };
     return (
         <div className={styles.appWrapper}>
