@@ -29,7 +29,7 @@
             .loginBox {
                 @include flex(column, center, flex-start, 35px);
                 @include appLeftRightPadding;
-                padding-top: 35px;
+                padding: 35px;
                 min-height: 300px;
                 border: 2px solid $logo-primary-color;
                 border-radius: 5px;
