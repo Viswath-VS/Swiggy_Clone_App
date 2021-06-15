@@ -11,6 +11,6 @@ app.use(express.json());
 app.use('/api', request);
 
 // returning error not found
-app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
+// app.use('*', (req, res) => res.status(404).json({ error: 'Ivalid Route or not found.' }));
 
 export default app;

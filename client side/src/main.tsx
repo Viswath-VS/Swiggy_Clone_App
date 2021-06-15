@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './layouts/App/App';
 import 'styles/core.scss';
 import { BrowserRouter } from 'react-router-dom';
+
+// redux store and provider inclusion
+import { store } from 'store/store';
+import { Provider } from 'react-redux';
+
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root'),
 );

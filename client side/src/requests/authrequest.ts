@@ -1,36 +1,71 @@
 import axiosConfig from 'config/axiosconfig';
+import { IResponse, loginUser, registerUser } from 'typings/request';
+import { userInfo } from 'typings/user';
+import { store } from 'store/store';
+import { resetAuthState } from 'store/models/userinfo';
 
-interface registerUser {
-    userName ?: string;
-    password: string;
-    email: string;
-    employeeID ?: string;
-}
-
-export const registerUser = ({ userName, password, email, employeeID }: registerUser) => {
+export const registerUsers = ({ name, employee_id, email, password }: registerUser): Promise<IResponse & { data?: userInfo }> => {
     return new Promise((resolve) => {
-        const formData = new FormData();
-        formData.append('username', userName);
-        formData.append('employee_id', employeeID);
-        formData.append('email', email);
-        formData.append('password', password);
-        axiosConfig.post('/register', formData).then((res) => {
-            resolve({ status: true, data: { username: userName, employeeid: employeeID, token: res.data.token } })
-        }).catch((error)=>{
-            resolve({status:false, error:error.message})
-        });
+        const data = {
+            name,
+            employee_id,
+            email,
+            password,
+        };
+        axiosConfig
+            .post('/register', data)
+            .then((res) => {
+                resolve({
+                    status: true,
+                    data: {
+                        name: res.data.user.name,
+                        employeeID: res.data.user.employee_id,
+                        centerName: res.data.user.vaccine_center,
+                        date: res.data.user.date,
+                        email_id:res.data.email,
+                        token: res.data.token,
+                        isSlotBooked: res.data.user.slot_booked,
+                        timeSlot: res.data.user.time_slot,
+                        vaccine: res.data.user.vaccine_name,
+                    },
+                });
+            })
+            .catch((error) => {
+                resolve({ status: false, error: error.message });
+            });
     });
 };
 
-export const loginUser = ({email, password}:registerUser) =>{
-    return new Promise((resolve)=>{
-        const formData = new FormData();
-        formData.append('email', email);
-        formData.append('password', password);
-        axiosConfig.post('/login', formData).then((res) => {
-            resolve({ status: true, data: { username: res.data.username, employeeid: res.data.employee_id, token: res.data.token } })
-        }).catch((error)=>{
-            resolve({status:false, error:error.message})
-        });
-    })
-}
+export const loginUsers = ({ email, password }: loginUser): Promise<IResponse & { data?: userInfo }> => {
+    return new Promise((resolve) => {
+        const data = {
+            email,
+            password,
+        };
+        axiosConfig
+            .post('/login', data)
+            .then((res) => {
+                resolve({
+                    status: true,
+                    data: {
+                        name: res.data.user.name,
+                        employeeID: res.data.user.employee_id,
+                        centerName: res.data.user.vaccine_center,
+                        date: res.data.user.date,
+                        email_id:res.data.user.email,
+                        token: res.data.token,
+                        isSlotBooked: res.data.user.slot_booked,
+                        timeSlot: res.data.user.time_slot,
+                        vaccine: res.data.user.vaccine_name,
+                    },
+                });
+            })
+            .catch((error) => {
+                resolve({ status: false, error: error.message });
+            });
+    });
+};
+
+export const unAuthenticateUser = async (): Promise<void> => {
+    store.dispatch(resetAuthState());
+};

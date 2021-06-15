@@ -15,7 +15,7 @@ mongoose
         useFindAndModify: false,
         useCreateIndex: true,
     })
-    .then(app.listen(port, () => console.log('database connected server is running at port 5000')))
+    .then(app.listen(port, () => console.log(`database connected server is running at port ${port}`)))
     .catch((err) => {
         console.log(err);
     });

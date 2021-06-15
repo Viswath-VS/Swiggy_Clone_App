@@ -5,6 +5,8 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from 'config/routes';
+import { useAppSelector } from 'config/hooks';
+import Success from 'components/successBar/success';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Home = () => {
     const classes = useStyles();
     const history = useHistory();
+    const authState = useAppSelector((state) => state.user.isSlotBooked);
     const handleClick = () => {
         history.push(ROUTES.APPOINTMENT);
     };
@@ -31,14 +34,18 @@ const Home = () => {
                 <h1>When We Said We Care For Our Employees, We Meant It!</h1>
             </div>
             <div className={styles.vaccineQuote}>
-                <h2>Book Your Appointment For Free Vaccination.</h2>
+                <h2> Free Vaccination For All Our Employees.</h2>
             </div>
-            <div className={styles.BookNowContainer}>
-                <h3>Pick Your Slot Now,</h3>
-                <Button onClick={handleClick} variant="contained" className={classes.button} endIcon={<ArrowForwardIosIcon />}>
-                    Book Now
-                </Button>
-            </div>
+            {!authState ? (
+                <div className={styles.BookNowContainer}>
+                    <h3>Pick Your Slot Now,</h3>
+                    <Button onClick={handleClick} variant="contained" className={classes.button} endIcon={<ArrowForwardIosIcon />}>
+                        Book Now
+                    </Button>
+                </div>
+            ) : (
+                <Success />
+            )}
         </div>
     );
 };

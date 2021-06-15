@@ -1,32 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './navbar.module.scss';
-import { AppBar, Toolbar, IconButton } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SwiggyLogo from 'images/Swiggy.svg';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles((theme: Theme) =>
-//     createStyles({
-//         root: {
-//             flexGrow: 1,
-//             backgroundColor: '#fcfcfc',
-//         },
-//         menuButton: {
-//             marginRight: theme.spacing(2),
-//             // width: '70%',
-//             // height: '70%',
-//         },
-//         title: {
-//             flexGrow: 1,
-//         },
-//     }),
-// );
+import { unAuthenticateUser } from 'requests/authrequest';
+import { useAppSelector } from 'config/hooks';
 
 const Navbar = () => {
+    const authState = useAppSelector((state) => state.user.isAuthenticated);
+    
     return (
         <div className={styles.navBarWrapper}>
             <div className={styles.navBarLogo}>
                 <img src={SwiggyLogo} alt="" />
             </div>
+            {authState ? (
+                <div className={styles.logoutContainer} onClick={unAuthenticateUser}>
+                    <p>LogOut</p>
+                    <ExitToAppIcon />
+                </div>
+            ) : (
+                ''
+            )}
         </div>
     );
 };

@@ -3,9 +3,11 @@ import styles from './auth.module.scss';
 import Navbar from 'components/navbar/navbar';
 import Signin from 'pages/signin/signin';
 import { TextField, Button } from '@material-ui/core';
-import { Redirect, Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import { ROUTES } from 'config/routes';
-import axiosConfig from 'config/axiosconfig';
+import { loginUsers } from 'requests/authrequest';
+import { useAppDispatch } from 'config/hooks';
+import { updateAuthState } from 'store/models/userinfo';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,13 +22,40 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Auth = () => {
+const Auth = (): ReactElement => {
+    // Action Helper
+    const dispatch = useAppDispatch();
+
+    // const history = useHistory();
     const classes = useStyles();
     const [userNameOrEmail, setUserNameOrEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
+
     // function to login.
-    const handleLogin = () => {};
+    const handleLogin = async () => {
+        if (isDisabled) return; // restrict on consecutive form submition via pressing enter
+
+        setIsDisabled(true);
+        try {
+            const email = userNameOrEmail;
+            const authResponse = await loginUsers({ email, password });
+            const userDetail = authResponse && authResponse.data;
+            if (authResponse.status) {
+                dispatch(
+                    updateAuthState({
+                        ...userDetail,
+                    }),
+                );
+            } else {
+                // account not found or some other error
+                throw new Error(authResponse.error);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+        setIsDisabled(false);
+    };
 
     return (
         <div className={styles.authWrapper}>
@@ -58,9 +87,15 @@ const Auth = () => {
                                     type="password"
                                     autoComplete="current-password"
                                 />
-                                <Button onClick={handleLogin} variant="contained" className={classes.button}>
-                                    Login
-                                </Button>
+                                {isDisabled ? (
+                                    <Button onClick={handleLogin} variant="contained" disabled className={classes.button}>
+                                        Login
+                                    </Button>
+                                ) : (
+                                    <Button onClick={handleLogin} variant="contained" className={classes.button}>
+                                        Login
+                                    </Button>
+                                )}
                                 <p>
                                     New employee?{' '}
                                     <span>
