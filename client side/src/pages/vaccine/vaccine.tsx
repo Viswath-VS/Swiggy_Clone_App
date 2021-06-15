@@ -10,7 +10,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { vaccineCenterData, vaccineDatas } from 'requests/datarequest';
 import { updateVaccine } from 'store/models/vaccinecenter';
 import { useAppDispatch, useAppSelector } from 'config/hooks';
-import { updateAuthState } from 'store/models/userinfo';
+import { updateVaccineInfo } from 'store/models/userinfo';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -91,7 +91,7 @@ const Vaccine = (): ReactElement => {
         appState.date = date;
         appState.timeSlot = timeSlot;
         appState.vaccine = vaccine;
-        dispatch(updateAuthState(appState));
+        dispatch(updateVaccineInfo({...appState}));
         history.push(ROUTES.APPOINTMENT_CONFORMATION);
     };
 

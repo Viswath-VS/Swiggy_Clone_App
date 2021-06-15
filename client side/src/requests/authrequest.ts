@@ -3,6 +3,7 @@ import { IResponse, loginUser, registerUser } from 'typings/request';
 import { userInfo } from 'typings/user';
 import { store } from 'store/store';
 import { resetAuthState } from 'store/models/userinfo';
+import { resetVaccine } from 'store/models/vaccinecenter';
 
 export const registerUsers = ({ name, employee_id, email, password }: registerUser): Promise<IResponse & { data?: userInfo }> => {
     return new Promise((resolve) => {
@@ -22,7 +23,7 @@ export const registerUsers = ({ name, employee_id, email, password }: registerUs
                         employeeID: res.data.user.employee_id,
                         centerName: res.data.user.vaccine_center,
                         date: res.data.user.date,
-                        email_id:res.data.email,
+                        email_id:res.data.user.email,
                         token: res.data.token,
                         isSlotBooked: res.data.user.slot_booked,
                         timeSlot: res.data.user.time_slot,
@@ -31,7 +32,7 @@ export const registerUsers = ({ name, employee_id, email, password }: registerUs
                 });
             })
             .catch((error) => {
-                resolve({ status: false, error: error.message });
+                resolve({ status: false, error: error.error });
             });
     });
 };
@@ -68,4 +69,5 @@ export const loginUsers = ({ email, password }: loginUser): Promise<IResponse & 
 
 export const unAuthenticateUser = async (): Promise<void> => {
     store.dispatch(resetAuthState());
+    store.dispatch(resetVaccine());
 };

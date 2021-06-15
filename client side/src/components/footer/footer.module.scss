@@ -1,0 +1,7 @@
+.footerContainer{
+    @include wh-100p;
+    @include flex(row, center, center);
+    color: #000 ;
+    text-align: center;
+    // background-color:$logo-primary-color ;
+}

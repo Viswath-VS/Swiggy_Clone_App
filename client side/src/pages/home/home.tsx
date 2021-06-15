@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Home = () => {
+const Home = (): ReactElement => {
     const classes = useStyles();
     const history = useHistory();
     const authState = useAppSelector((state) => state.user.isSlotBooked);

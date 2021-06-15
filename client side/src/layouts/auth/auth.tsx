@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import styles from './auth.module.scss';
 import Navbar from 'components/navbar/navbar';
 import Signin from 'pages/signin/signin';
+import Footer from 'components/footer/footer';
 import { TextField, Button } from '@material-ui/core';
 import { Route, Switch, Link } from 'react-router-dom';
 import { ROUTES } from 'config/routes';
@@ -35,7 +36,6 @@ const Auth = (): ReactElement => {
     // function to login.
     const handleLogin = async () => {
         if (isDisabled) return; // restrict on consecutive form submition via pressing enter
-
         setIsDisabled(true);
         try {
             const email = userNameOrEmail;
@@ -108,6 +108,7 @@ const Auth = (): ReactElement => {
                     </Switch>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

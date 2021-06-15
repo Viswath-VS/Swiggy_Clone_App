@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styles from './confirmation.module.scss';
 import { ROUTES } from 'config/routes';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { IconButton, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleSharpIcon from '@material-ui/icons/CheckCircleSharp';
@@ -31,10 +31,10 @@ const Conformation = (): ReactElement => {
     // Submition conformation.
     const handleConfirmation = async () => {
       try {
-        const {data, status, error} = await confirmSubmition (authState); 
+        const {data, status, error} = await confirmSubmition (); 
         if(status){
-            dispatch(updateAuthState(data));
-            console.log('success');
+            dispatch(updateAuthState({...data}));
+            console.log({...data});
             
             history.push(ROUTES.DASHBOARD);
         }

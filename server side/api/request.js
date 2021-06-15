@@ -11,7 +11,7 @@ router.route('/login').post(UsersDAO.loginUser);
 
 router.route('/data').get(authMiddleware, UsersDAO.getVaccine);
 router.route('/center').post(authMiddleware, UsersDAO.getVaccineCenter);
-router.route('/confirm').post(authMiddleware, UsersDAO.verifySubmition);
+router.route('/confirm').post( UsersDAO.verifySubmition);
 // router.route('/create').post(UsersDAO.createCenter);
 // router.route("/auth").post(authMiddleware,UsersDAO.authUser);
 

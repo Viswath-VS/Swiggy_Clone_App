@@ -18,9 +18,13 @@ const vaccineSlice = createSlice({
             Object.assign(state, payload);
             localStorage.setItem('vaccine-info', JSON.stringify(state));
         },
+        resetVaccine: (state) => {
+            state.splice(0, state.length, ...initialState);
+            localStorage.clear();
+        },
     },
 });
 
 // exporting reducer and actions.
 export default vaccineSlice.reducer;
-export const { updateVaccine } = vaccineSlice.actions;
+export const { updateVaccine, resetVaccine } = vaccineSlice.actions;

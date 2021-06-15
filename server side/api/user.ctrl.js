@@ -11,7 +11,7 @@ export default class UsersDAO {
             if (error) return res.status(400).send(error.details[0].message);
 
             let user = await User.findOne({ email: req.body.email });
-            if (user) return res.status(400).send('User already registered.');
+            if (user) return res.status(400).send({ error: 'User already registered.' });
             user = new User({
                 name: req.body.name,
                 email: req.body.email,
@@ -104,21 +104,22 @@ export default class UsersDAO {
     static async verifySubmition(req, res) {
         try {
             let user = await User.findOneAndUpdate(
-                { email: req.body.props.email_id },
+                { email: req.body.email_id },
                 {
                     slot_booked: true,
-                    vaccine_center: req.body.props.centerName,
-                    date: req.body.props.date,
-                    time_slot: req.body.props.timeSlot,
-                    vaccine_name: req.body.props.vaccine,
+                    vaccine_center: req.body.centerName,
+                    date: req.body.date,
+                    time_slot: req.body.timeSlot,
+                    vaccine_name: req.body.vaccine,
                 },
+                { new: true },
                 (error, saved) => {
                     if (error) return error;
                     else return saved;
                 },
             );
             console.log(req.body);
-            res.send(user).status(200);
+            res.json(user).status(200);
         } catch (error) {
             res.send(error.message);
         }

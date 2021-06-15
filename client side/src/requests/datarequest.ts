@@ -34,11 +34,13 @@ export const vaccineCenterData = async (date: string, timeSlot: string, vaccine:
         let token = AppState && AppState.token;
         const headers = { Authorization: `Bearer ${token}` };
         const data = {
-            date, timeSlot, vaccine
-        }
+            date,
+            timeSlot,
+            vaccine,
+        };
 
         axiosConfig
-            .post('/center', data,{ headers: headers })
+            .post('/center', data, { headers: headers })
             .then((res) => {
                 return resolve({
                     status: true,
@@ -51,7 +53,7 @@ export const vaccineCenterData = async (date: string, timeSlot: string, vaccine:
     });
 };
 
-export const confirmSubmition = async ({...props}:userInfo): Promise<IResponse & { data?: userInfo }> => {
+export const confirmSubmition = async (): Promise<IResponse & { data?: userInfo }> => {
     return new Promise((resolve) => {
         let state = localStorage['user-info'];
         let AppState;
@@ -60,14 +62,32 @@ export const confirmSubmition = async ({...props}:userInfo): Promise<IResponse &
         }
         let token = AppState && AppState.token;
         const headers = { Authorization: `Bearer ${token}` };
-        const data = {props}
+        const data = {
+            email_id: AppState.email_id,
+            date: AppState.date,
+            centerName: AppState.centerName,
+            timeSlot: AppState.timeSlot,
+            vaccine: AppState.vaccine,
+        };
 
         axiosConfig
-            .post('/confirm', data,{ headers: headers })
+            .post('/confirm', data, { headers: headers })
             .then((res) => {
+                console.log('response', res.data);
+
                 return resolve({
                     status: true,
-                    data: res.data,
+                    data: {
+                        name: res.data.name,
+                        employeeID: res.data.employee_id,
+                        email_id: res.data.email,
+                        isSlotBooked: res.data.slot_booked,
+                        centerName: res.data.vaccine_center,
+                        date: res.data.date,
+                        timeSlot: res.data.time_slot,
+                        token: token,
+                        vaccine: res.data.vaccine_name,
+                    },
                 });
             })
             .catch((error) => {
@@ -75,5 +95,3 @@ export const confirmSubmition = async ({...props}:userInfo): Promise<IResponse &
             });
     });
 };
-
-
