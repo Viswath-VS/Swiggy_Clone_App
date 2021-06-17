@@ -27,7 +27,7 @@ const Auth = (): ReactElement => {
     // Action Helper
     const dispatch = useAppDispatch();
 
-    // const history = useHistory();
+
     const classes = useStyles();
     const [userNameOrEmail, setUserNameOrEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -35,8 +35,7 @@ const Auth = (): ReactElement => {
 
     // function to login.
     const handleLogin = async () => {
-        if (isDisabled) return; // restrict on consecutive form submition via pressing enter
-        setIsDisabled(true);
+
         try {
             const email = userNameOrEmail;
             const authResponse = await loginUsers({ email, password });
@@ -54,7 +53,7 @@ const Auth = (): ReactElement => {
         } catch (error) {
             console.log(error.message);
         }
-        setIsDisabled(false);
+ 
     };
 
     return (

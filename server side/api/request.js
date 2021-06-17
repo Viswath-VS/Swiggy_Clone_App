@@ -1,5 +1,6 @@
 import express from 'express';
 import UsersDAO from './user.ctrl.js';
+import vaccineDAO from './vaccine.ctrl.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -9,9 +10,9 @@ router.route('/register').post(UsersDAO.addUser);
 
 router.route('/login').post(UsersDAO.loginUser);
 
-router.route('/data').get(authMiddleware, UsersDAO.getVaccine);
-router.route('/center').post(authMiddleware, UsersDAO.getVaccineCenter);
-router.route('/confirm').post( UsersDAO.verifySubmition);
+router.route('/data').get(authMiddleware, vaccineDAO.getVaccine);
+router.route('/center').post(authMiddleware, vaccineDAO.getVaccineCenter);
+router.route('/confirm').post(vaccineDAO.verifySubmition);
 // router.route('/create').post(UsersDAO.createCenter);
 // router.route("/auth").post(authMiddleware,UsersDAO.authUser);
 
