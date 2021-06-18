@@ -33,9 +33,6 @@ const Signin = (): ReactElement => {
 
     // function to register new employee.
     const handleRegister = async () => {
-        // if (isDisabled) return; // restrict on consecutive form submition via pressing enter
-
-        // setIsDisabled(true);
         try {
             const email = userNameOrEmail;
             const employee_id = employeeID;
@@ -54,10 +51,8 @@ const Signin = (): ReactElement => {
         } catch (error) {
             console.log(error.message);
         }
-        // setIsDisabled(false);
     };
 
-    
     return (
         <div>
             <div className={styles.loginTitle}>

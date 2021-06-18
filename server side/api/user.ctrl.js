@@ -1,7 +1,7 @@
 import User from '../models/userSchema.js';
-import Vaccine from '../models/vaccineCenterSchema.js';
+import VaccineCenter from '../models/vaccineCenterSchema.js';
 import bcrypt from 'bcrypt';
-import { validateUser, validateAuth } from '../middleware/validation.js';
+import { validateUser } from '../middleware/validation.js';
 
 export default class UsersDAO {
     //   function to add new user to database
@@ -37,10 +37,6 @@ export default class UsersDAO {
     //   function to login existing user.
     static async loginUser(req, res) {
         try {
-            // no validation required for login flow.
-
-            // const { error } = await validateAuth(req.body);
-            // if (error) return res.status(200).json({ msg: error.details[0].message, error: true });
             let user = await User.findOne({ email: req.body.email });
             if (!user) return res.status(200).json({ msg: 'Incorrect email ID.', error: true });
 
@@ -56,12 +52,12 @@ export default class UsersDAO {
     }
     static async createCenter(req, res) {
         try {
-            // let user = await Vaccine.findOne({ vaccine_center: req.body.vaccine_center });
-            // if (user) return res.status(400).send('User already registered.');
-            let vaccine = new Vaccine({
-                vaccine_center: req.body.vaccine_center,
-                location: req.body.location,
-                dates: req.body.dates,
+            let data = req.body;
+            let vaccine = new VaccineCenter({
+                id: data.id,
+                Vaccination_Center: data.vaccine,
+                Doses_Remaining: data.doses,
+                availability: data.availability,
             });
             await vaccine.save();
             res.send({ msg: 'successfully added in database' });

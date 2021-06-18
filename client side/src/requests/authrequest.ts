@@ -16,6 +16,7 @@ export const registerUsers = ({ name, employee_id, email, password }: registerUs
         axiosConfig
             .post('/register', data)
             .then((res) => {
+                
                 if (res.data.error) {
                     resolve({
                         status: false,

@@ -1,49 +1,53 @@
-// var dateVar = new Date('01-JAN-2016')
-// var d = dateVar.add(-1).day().toString('dd-MMM-yyyy');
 import mongoose from 'mongoose';
 
-const vaccineSlotSchema = new mongoose.Schema({
-    slot: {
-        type: String,
-        required: true,
-    },
-    dose_remaining: {
+// const vaccineSlotSchema = new mongoose.Schema({
+//     slot: {
+//         type: String,
+//         required: true,
+//     },
+//     dose_remaining: {
+//         type: Number,
+//         required: true,
+//     },
+//     vaccines: {
+//         type: [String],
+//         required: true,
+//     },
+//     availablity: {
+//         type: Boolean,
+//         required: true,
+//     },
+// });
+// const vaccineDateSchema = new mongoose.Schema({
+//     date: {
+//         type: String,
+//         required: true,
+//     },
+//     time_slots: [vaccineSlotSchema],
+// });
+
+const vaccineCenterSchema = new mongoose.Schema({
+    id: {
         type: Number,
         required: true,
     },
-    vaccines: {
-        type: [String],
+    Vaccination_Center: {
+        type: String,
         required: true,
     },
-    availablity: {
+    Doses_Remaining: {
+        type: Number,
+        required: true,
+    },
+    availability: {
         type: Boolean,
         required: true,
     },
 });
-const vaccineDateSchema = new mongoose.Schema({
-    date: {
-        type: String,
-        required: true,
-    },
-    time_slots: [vaccineSlotSchema],
-});
 
-const vaccineCenterSchema = new mongoose.Schema({
-    vaccine_center: {
-        type: String,
-        required: true,
-    },
-    location: {
-        type: String,
-        required: true,
-    },
-    vaccines:[String],
-    dates: [vaccineDateSchema],
-});
+const VaccineCenter = mongoose.model('VaccineCenter', vaccineCenterSchema);
 
-const Vaccine = mongoose.model('Vaccine', vaccineCenterSchema);
-
-export default Vaccine;
+export default VaccineCenter;
 
 // {
 //     "vaccine_center":"xyz healthcenter",

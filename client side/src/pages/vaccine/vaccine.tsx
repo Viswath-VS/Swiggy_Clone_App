@@ -72,26 +72,25 @@ const Vaccine = (): ReactElement => {
         setselected(true);
     };
 
-    // const vaccineDetails = async () => {
-    //     const { data } = await vaccineDatas();
-    //     console.log(data);
-    // };
+    const vaccineDetails = async () => {
+        const { data } = await vaccineDatas();
+        console.log(data);
+    };
 
     const handleSelectCenter = async (e: any) => {
         let state = localStorage['user-info'];
         let vaccineState = localStorage['vaccine-info'];
         let appState;
-
         if (state) {
             appState = JSON.parse(state);
         }
-        let num = 0;
+        let num = e.target.value - 1;
         let vaccineInfo = JSON.parse(vaccineState);
         appState.centerName = vaccineInfo[num].Vaccination_Center;
         appState.date = date;
         appState.timeSlot = timeSlot;
         appState.vaccine = vaccine;
-        dispatch(updateVaccineInfo({...appState}));
+        dispatch(updateVaccineInfo({ ...appState }));
         history.push(ROUTES.APPOINTMENT_CONFORMATION);
     };
 
@@ -152,7 +151,7 @@ const Vaccine = (): ReactElement => {
                             {selected ? (
                                 <div>
                                     <div className={styles.slotItemsCenter}>
-                                        <p>Select a Vaccination Center</p>
+                                        <p>Available Vaccination Centers</p>
                                     </div>
                                     <div className={styles.hospitalLists}>
                                         <Table className={classes.table} aria-label="simple table">
@@ -166,17 +165,19 @@ const Vaccine = (): ReactElement => {
                                             </TableHead>
                                             <TableBody>
                                                 {vaccineData.map((obj, index) => {
-                                                    return (
+                                                    return obj.availability ? (
                                                         <TableRow key={index}>
-                                                            <TableCell align="left">{obj._id}</TableCell>
+                                                            <TableCell align="left">{obj.id}</TableCell>
                                                             <TableCell align="left">{obj.Vaccination_Center}</TableCell>
                                                             <TableCell align="left">{obj.Doses_Remaining}</TableCell>
                                                             <TableCell align="left">
-                                                                <IconButton key={obj._id} value={obj._id} onClick={(e) => handleSelectCenter(e)}>
+                                                                <IconButton key={obj.id} value={obj.id} onClick={(e) => handleSelectCenter(e)}>
                                                                     <CheckCircleSharpIcon />
                                                                 </IconButton>
                                                             </TableCell>
                                                         </TableRow>
+                                                    ) : (
+                                                        ''
                                                     );
                                                 })}
                                             </TableBody>

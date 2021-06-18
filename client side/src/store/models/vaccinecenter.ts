@@ -3,10 +3,10 @@ import { vaccineData } from 'typings/request';
 
 const initialState: [vaccineData] = [
     {
-        _id: 0,
+        id: 0,
         Vaccination_Center: '',
         Doses_Remaining: 0,
-        location: '',
+        availability: false,
     },
 ];
 

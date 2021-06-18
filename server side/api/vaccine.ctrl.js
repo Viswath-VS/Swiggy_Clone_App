@@ -1,39 +1,18 @@
-import Vaccine from '../models/vaccineCenterSchema.js';
+import VaccineCenter from '../models/vaccineCenterSchema.js';
 import User from '../models/userSchema.js';
 
-// All vaccines related DAO's
+// All vaccines related DAO's are hadndled here.
 export default class vaccineDAO {
-    static async getVaccine(req, res) {
+    static async getVaccineCenter(req, res) {
         try {
-            const vaccineData = await Vaccine.find({}, (err, saved) => {
+            const vaccineData = await VaccineCenter.find({}, (err, saved) => {
                 if (err) {
                     return err;
                 } else return saved;
             });
-            res.send(vaccineData);
+            res.json({ error: false, data: vaccineData });
         } catch (error) {
-            res.send(error.message);
-        }
-    }
-    static async getVaccineCenter(req, res) {
-        try {
-            const vaccineData = [
-                {
-                    _id: 1,
-                    Vaccination_Center: 'VS8 hospital',
-                    Doses_Remaining: 12,
-                    location: 'central bus stand,trichy.',
-                },
-                {
-                    _id: 2,
-                    Vaccination_Center: 'xyz healthcenter',
-                    Doses_Remaining: 8,
-                    location: 'thillai nagar, trichy.',
-                },
-            ];
-            res.send(vaccineData);
-        } catch (error) {
-            res.send(error.message);
+            res.json({ error: true, msg: error.message });
         }
     }
 
@@ -54,10 +33,35 @@ export default class vaccineDAO {
                     else return saved;
                 },
             );
-
-            res.json(user).status(200);
+            const vaccineData = await VaccineCenter.find({ Vaccination_Center: req.body.centerName }, (err, saved) => {
+                if (err) {
+                    return err;
+                } else return saved;
+            });
+            console.log(vaccineData);
+            let newDoses = vaccineData[0].Doses_Remaining - 1;
+            if (newDoses === 0) {
+                let vaccine = await VaccineCenter.updateOne(
+                    { id: vaccineData.id },
+                    { Doses_Remaining: newDoses, availability: false },
+                    (err, saved) => {
+                        if (err) {
+                            return err;
+                        } else return saved;
+                    },
+                );
+                console.log(vaccine);
+            } else {
+                let vaccine = await VaccineCenter.updateOne({ id: vaccineData[0].id }, { Doses_Remaining: newDoses }, (err, saved) => {
+                    if (err) {
+                        return err;
+                    } else return saved;
+                });
+                console.log(vaccine);
+            }
+            res.json({ error: false, data: user }).status(200);
         } catch (error) {
-            res.send(error.message);
+            res.json({ error: true, msg: error.message });
         }
     }
 }

@@ -1,6 +1,7 @@
 import { userInfo } from './../typings/user';
 import axiosConfig from 'config/axiosconfig';
 import { dataResponse, IResponse, vaccineData } from 'typings/request';
+
 export const vaccineDatas = async (): Promise<IResponse & { data?: [dataResponse] }> => {
     return new Promise((resolve) => {
         let state = localStorage['user-info'];
@@ -13,6 +14,7 @@ export const vaccineDatas = async (): Promise<IResponse & { data?: [dataResponse
         axiosConfig
             .get('/data', { headers: headers })
             .then((res) => {
+                console.log(res);
                 return resolve({
                     status: true,
                     data: res.data,
@@ -42,9 +44,11 @@ export const vaccineCenterData = async (date: string, timeSlot: string, vaccine:
         axiosConfig
             .post('/center', data, { headers: headers })
             .then((res) => {
+                console.log('vaccine data', res);
+                
                 return resolve({
                     status: true,
-                    data: res.data,
+                    data: res.data.data,
                 });
             })
             .catch((error) => {
@@ -78,15 +82,15 @@ export const confirmSubmition = async (): Promise<IResponse & { data?: userInfo 
                 return resolve({
                     status: true,
                     data: {
-                        name: res.data.name,
-                        employeeID: res.data.employee_id,
-                        email_id: res.data.email,
-                        isSlotBooked: res.data.slot_booked,
-                        centerName: res.data.vaccine_center,
-                        date: res.data.date,
-                        timeSlot: res.data.time_slot,
+                        name: res.data.data.name,
+                        employeeID: res.data.data.employee_id,
+                        email_id: res.data.data.email,
+                        isSlotBooked: res.data.data.slot_booked,
+                        centerName: res.data.data.vaccine_center,
+                        date: res.data.data.date,
+                        timeSlot: res.data.data.time_slot,
                         token: token,
-                        vaccine: res.data.vaccine_name,
+                        vaccine: res.data.data.vaccine_name,
                     },
                 });
             })

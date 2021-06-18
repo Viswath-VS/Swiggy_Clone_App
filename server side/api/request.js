@@ -6,14 +6,16 @@ import authMiddleware from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // handling various api request from front-end
-router.route('/register').post(UsersDAO.addUser);
 
+// Authentication routes.
+router.route('/register').post(UsersDAO.addUser);
 router.route('/login').post(UsersDAO.loginUser);
 
-router.route('/data').get(authMiddleware, vaccineDAO.getVaccine);
+// protected Routes
+
 router.route('/center').post(authMiddleware, vaccineDAO.getVaccineCenter);
-router.route('/confirm').post(vaccineDAO.verifySubmition);
-// router.route('/create').post(UsersDAO.createCenter);
-// router.route("/auth").post(authMiddleware,UsersDAO.authUser);
+router.route('/confirm').post(authMiddleware,vaccineDAO.verifySubmition);
+router.route('/create').post(UsersDAO.createCenter);
+// router.route('/data').get(authMiddleware, vaccineDAO.getVaccine);
 
 export default router;
