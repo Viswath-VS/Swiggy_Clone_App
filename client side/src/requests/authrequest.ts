@@ -16,20 +16,27 @@ export const registerUsers = ({ name, employee_id, email, password }: registerUs
         axiosConfig
             .post('/register', data)
             .then((res) => {
-                resolve({
-                    status: true,
-                    data: {
-                        name: res.data.user.name,
-                        employeeID: res.data.user.employee_id,
-                        centerName: res.data.user.vaccine_center,
-                        date: res.data.user.date,
-                        email_id:res.data.user.email,
-                        token: res.data.token,
-                        isSlotBooked: res.data.user.slot_booked,
-                        timeSlot: res.data.user.time_slot,
-                        vaccine: res.data.user.vaccine_name,
-                    },
-                });
+                if (res.data.error) {
+                    resolve({
+                        status: false,
+                        error: res.data.msg,
+                    });
+                } else if (!res.data.error) {
+                    resolve({
+                        status: true,
+                        data: {
+                            name: res.data.user.name,
+                            employeeID: res.data.user.employee_id,
+                            centerName: res.data.user.vaccine_center,
+                            date: res.data.user.date,
+                            email_id: res.data.user.email,
+                            token: res.data.token,
+                            isSlotBooked: res.data.user.slot_booked,
+                            timeSlot: res.data.user.time_slot,
+                            vaccine: res.data.user.vaccine_name,
+                        },
+                    });
+                }
             })
             .catch((error) => {
                 resolve({ status: false, error: error.error });
@@ -46,20 +53,28 @@ export const loginUsers = ({ email, password }: loginUser): Promise<IResponse & 
         axiosConfig
             .post('/login', data)
             .then((res) => {
-                resolve({
-                    status: true,
-                    data: {
-                        name: res.data.user.name,
-                        employeeID: res.data.user.employee_id,
-                        centerName: res.data.user.vaccine_center,
-                        date: res.data.user.date,
-                        email_id:res.data.user.email,
-                        token: res.data.token,
-                        isSlotBooked: res.data.user.slot_booked,
-                        timeSlot: res.data.user.time_slot,
-                        vaccine: res.data.user.vaccine_name,
-                    },
-                });
+                console.log(res.data);
+                if (res.data.error) {
+                    resolve({
+                        status: false,
+                        error: res.data.msg,
+                    });
+                } else if (!res.data.error) {
+                    resolve({
+                        status: true,
+                        data: {
+                            name: res.data.user.name,
+                            employeeID: res.data.user.employee_id,
+                            centerName: res.data.user.vaccine_center,
+                            date: res.data.user.date,
+                            email_id: res.data.user.email,
+                            token: res.data.token,
+                            isSlotBooked: res.data.user.slot_booked,
+                            timeSlot: res.data.user.time_slot,
+                            vaccine: res.data.user.vaccine_name,
+                        },
+                    });
+                }
             })
             .catch((error) => {
                 resolve({ status: false, error: error.message });
