@@ -1,0 +1,21 @@
+.messageBarWrapper {
+    height: auto;
+    width: auto;
+    align-self: center;
+    position: absolute;
+    top: 8px;
+    // left: 517px;
+
+    .messageContainer {
+        @include flex(row, center, center, 8px);
+        padding: 15px 20px;
+        text-align: center;
+        background-color: $background-primary;
+
+        // .error{
+        color: $danger-color;
+        border: 1px solid $danger-color;
+        border-radius: 5px;
+        // }
+    }
+}

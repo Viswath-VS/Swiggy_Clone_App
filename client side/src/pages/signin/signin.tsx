@@ -7,6 +7,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useAppDispatch } from 'config/hooks';
 import { updateAuthState } from 'store/models/userinfo';
 import { registerUsers } from 'requests/authrequest';
+import { showMessage } from 'utilities/general';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -46,7 +47,7 @@ const Signin = (): ReactElement => {
                 );
             } else {
                 // account not found or some other error
-                throw new Error(authResponse.error);
+                showMessage(authResponse.error, 'error');
             }
         } catch (error) {
             console.log(error.message);

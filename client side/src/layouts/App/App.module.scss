@@ -3,12 +3,14 @@
     @include flex(column, center, start);
     overflow: hidden;
     position: relative;
+
     .appCoreWrapper {
         @include wh-100p;
+        @include flex(column, center, start);
         overflow: auto;
-        // background: $background-primary;
         color: $font-primary;
         position: relative;
+
         .appContainer {
             width: 100%;
             height: 100%;

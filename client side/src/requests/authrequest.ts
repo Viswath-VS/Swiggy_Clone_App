@@ -16,7 +16,6 @@ export const registerUsers = ({ name, employee_id, email, password }: registerUs
         axiosConfig
             .post('/register', data)
             .then((res) => {
-                
                 if (res.data.error) {
                     resolve({
                         status: false,
@@ -54,7 +53,6 @@ export const loginUsers = ({ email, password }: loginUser): Promise<IResponse & 
         axiosConfig
             .post('/login', data)
             .then((res) => {
-                console.log(res.data);
                 if (res.data.error) {
                     resolve({
                         status: false,
